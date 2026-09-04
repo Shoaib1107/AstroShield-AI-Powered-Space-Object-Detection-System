@@ -1,20 +1,27 @@
-AstroShield 🚀🛡️
+# AstroShield 🚀🛡️
+
 AstroShield is a comprehensive computer vision application that leverages YOLOv8 Object Detection to identify and monitor critical safety equipment and hazards. Designed with a deep-space aesthetic, the web interface allows users to upload images or stream webcam footage to instantly detect objects like oxygen tanks, fire extinguishers, and first aid boxes.
 
-Features
-Real-Time Object Detection: Upload images or use webcam feed for instant predictions.
-7 Critical Safety Classes: Detects OxygenTank, NitrogenTank, FirstAidBox, FireAlarm, SafetySwitchPanel, EmergencyPhone, and FireExtinguisher.
-YOLOv8 Powered: Built on the state-of-the-art Ultralytics YOLOv8 architecture for fast and accurate inference.
-Flask Backend & API: A robust Python backend handling model inference and serving RESTful APIs.
-Interactive Web UI: A beautifully designed, highly interactive frontend featuring a space-themed UI with particle effects and smooth animations.
-Integrated Retraining Pipeline: Built-in scripts and instructions to easily finetune or retrain the model on new data.
-Advanced Post-Processing: Capable of filtering overlapping detection boxes for precise localized results.
-Tech Stack
-Backend: Python, Flask, Werkzeug, Gunicorn
-Computer Vision: Ultralytics (YOLOv8), PyTorch, OpenCV
-Frontend: HTML5, CSS3 (Custom animations, glassmorphism), Vanilla JavaScript, Chart.js
-Environment Management: Conda / Pip
-Project Structure
+## Features
+
+- **Real-Time Object Detection**: Upload images or use webcam feed for instant predictions.
+- **7 Critical Safety Classes**: Detects `OxygenTank`, `NitrogenTank`, `FirstAidBox`, `FireAlarm`, `SafetySwitchPanel`, `EmergencyPhone`, and `FireExtinguisher`.
+- **YOLOv8 Powered**: Built on the state-of-the-art Ultralytics YOLOv8 architecture for fast and accurate inference.
+- **Flask Backend & API**: A robust Python backend handling model inference and serving RESTful APIs.
+- **Interactive Web UI**: A beautifully designed, highly interactive frontend featuring a space-themed UI with particle effects and smooth animations.
+- **Integrated Retraining Pipeline**: Built-in scripts and instructions to easily finetune or retrain the model on new data.
+- **Advanced Post-Processing**: Capable of filtering overlapping detection boxes for precise localized results.
+
+## Tech Stack
+
+- **Backend**: Python, Flask, Werkzeug, Gunicorn
+- **Computer Vision**: Ultralytics (YOLOv8), PyTorch, OpenCV
+- **Frontend**: HTML5, CSS3 (Custom animations, glassmorphism), Vanilla JavaScript, Chart.js
+- **Environment Management**: Conda / Pip
+
+## Project Structure
+
+```text
 AstroShield_project/
 ├── app/                    # Flask Application
 │   ├── templates/          # Contains index.html (Web UI)
@@ -32,46 +39,66 @@ AstroShield_project/
 ├── requirements.txt        # Python dependencies
 ├── environment.yaml        # Conda environment definition
 └── ...                     # Evaluation and utility scripts
-Setup & Installation
+```
+
+## Setup & Installation
+
 Follow these steps to set up AstroShield locally:
 
-1. Clone or Download the Repository
+### 1. Clone or Download the Repository
+
 Make sure you are in the project root directory.
 
-2. Create the Environment
-Using Conda (Recommended):
+### 2. Create the Environment
 
+Using **Conda** (Recommended):
+```powershell
 conda env create -f environment.yaml
 conda activate observo
 pip install -r requirements.txt
-Using pip:
+```
 
+Using **pip**:
+```powershell
 python -m venv venv
 venv\Scripts\activate  # On Windows
 pip install -r requirements.txt
-Running the Application
+```
+
+## Running the Application
+
 To start the AstroShield backend server and Web UI:
 
+```powershell
 # Ensure your environment is active
 python start_server.py
-The server will start on port 10000 (by default). Open your web browser and navigate to: http://localhost:10000
+```
 
-Retraining the Model
+The server will start on port `10000` (by default).
+Open your web browser and navigate to:
+**[http://localhost:10000](http://localhost:10000)**
+
+## Retraining the Model
+
 If you find that the model is misclassifying certain objects, or if you want to expand the dataset, you can initiate a retraining process:
 
-Add Data: Ensure your new training images and labels are placed correctly within data/raw/train/images and data/raw/train/labels.
-Run the Script:
+1. **Add Data**: Ensure your new training images and labels are placed correctly within `data/raw/train/images` and `data/raw/train/labels`.
+2. **Run the Script**:
+```powershell
 conda activate observo
 python retrain_model.py
-Monitor Progress: Training logs are outputted to the console and saved inside models/logs/yolov8_astroshield/.
-Deploy: Once complete, the updated model is automatically saved to models/weights/best.pt. Restart your server to load the new weights.
-For full step-by-step instructions, see RUN_RETRAINING.md.
+```
+3. **Monitor Progress**: Training logs are outputted to the console and saved inside `models/logs/yolov8_astroshield/`.
+4. **Deploy**: Once complete, the updated model is automatically saved to `models/weights/best.pt`. Restart your server to load the new weights.
 
-API Endpoints
+For full step-by-step instructions, see [RUN_RETRAINING.md](RUN_RETRAINING.md).
+
+## API Endpoints
+
 The Flask backend exposes several endpoints for seamless frontend integration:
 
-GET / - Serves the main SPA interface.
-POST /predict - Primary detection endpoint. Accepts image uploads, runs inference, and returns bounded boxes with confidence scores.
-POST /api/detect - Advanced detection endpoint offering filtered overlapping bounding boxes.
-GET /api/health - Basic server health check.
-GET /api/statistics - Provides dataset statistics and class distribution for rendering charts on the frontend.
+- `GET /` - Serves the main SPA interface.
+- `POST /predict` - Primary detection endpoint. Accepts image uploads, runs inference, and returns bounded boxes with confidence scores.
+- `POST /api/detect` - Advanced detection endpoint offering filtered overlapping bounding boxes.
+- `GET /api/health` - Basic server health check.
+- `GET /api/statistics` - Provides dataset statistics and class distribution for rendering charts on the frontend.
